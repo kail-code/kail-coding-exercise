@@ -5,7 +5,7 @@ import {
   useNavigate,
   useParams,
 } from "react-router";
-import ProgressBar from "../common/ProgressBar";
+import { ProgressBar } from "../common/ProgressBar";
 import {
   getCurrentQuestionIndex,
   getQuestionByIndex,

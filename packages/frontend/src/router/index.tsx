@@ -1,6 +1,6 @@
 import { Home } from "@/components/Home";
 import { QuestionsRedirect } from "@/components/common/QuestionsRedirect";
-import { Question } from "@/components/Question";
+import { Question } from "@/components/Section/Question";
 import { createBrowserRouter } from "react-router";
 import { App } from "@/App";
 import { Spinner } from "@/components/common/Spinner";

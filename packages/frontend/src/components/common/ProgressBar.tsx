@@ -3,7 +3,7 @@ interface ProgressBarProps {
   total: number;
 }
 
-function ProgressBar({ current, total }: ProgressBarProps) {
+export const ProgressBar: React.FC<ProgressBarProps> = ({ current, total }) => {
   const percentage = (current / total) * 100;
 
   return (
@@ -19,6 +19,4 @@ function ProgressBar({ current, total }: ProgressBarProps) {
       </div>
     </>
   );
-}
-
-export default ProgressBar;
+};

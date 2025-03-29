@@ -1,5 +1,5 @@
 import React from "react";
-import { LoadingWrapper } from "./components/LoadingWrapper";
+import { LoadingWrapper } from "./components/common/LoadingWrapper";
 import { Outlet } from "react-router";
 import { Header } from "./components/common/Header";
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigation } from "react-router";
-import { Spinner } from "./common/Spinner";
+import { Spinner } from "./Spinner";
 
 export const LoadingWrapper: React.FC<{ children: React.ReactNode }> = ({
   children,
