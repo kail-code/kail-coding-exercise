@@ -1,0 +1,33 @@
+daemon off;
+worker_processes 1;
+
+events {
+    worker_connections 1024;
+}
+
+http {
+    include mime.types;
+    default_type application/octet-stream;
+    sendfile on;
+
+    server {
+        listen <%= ENV['PORT'] %>;
+        server_name _;
+        
+        root /app/packages/frontend/dist;
+        index index.html;
+
+        location / {
+            try_files $uri $uri/ /index.html;
+            add_header Cache-Control "no-cache";
+        }
+
+        location /static/ {
+            expires 1y;
+            add_header Cache-Control "public";
+        }
+
+        # Handle 404s with the index page
+        error_page 404 =200 /index.html;
+    }
+}

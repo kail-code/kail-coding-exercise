@@ -5,6 +5,7 @@
     "packages/*"
   ],
   "scripts": {
+    "start": "cd packages/frontend && yarn start",
     "build": "cd packages/frontend && yarn build",
     "test": "yarn workspaces run test",
     "dev": "yarn workspaces run dev",
