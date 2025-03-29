@@ -1,24 +1,23 @@
 import React from "react";
 import { useParams, useRouteLoaderData } from "react-router";
 import { useSection } from "@/contexts/SectionContext";
-import { getQuestionById } from "@/selectors/screener.selectors";
+import { getQuestionById, getSection } from "@/selectors/screener.selectors";
 
 export const Question: React.FC = () => {
   // Hooks
-  const questionsData = useRouteLoaderData("questions");
+  const data = useRouteLoaderData("questions");
   const { questionId, sectionIndex } = useParams();
   const { getAnswer, addAnswer, updateAnswer } = useSection();
 
   // Selectors
-  const section = questionsData?.content.sections[0];
+  const section = getSection(data, { sectionIndex });
   const answers = section?.answers;
-  const question = getQuestionById(questionsData, { sectionIndex, questionId });
+  const question = getQuestionById(data, { sectionIndex, questionId });
   const answer = getAnswer(question?.question_id);
 
   const handleAnswer = (value: number) => {
     if (question) {
-      const existingAnswer = getAnswer(question.question_id);
-      if (existingAnswer !== undefined) {
+      if (answer !== undefined) {
         updateAnswer(question.question_id, value);
       } else {
         addAnswer(question.question_id, value);
