@@ -17,9 +17,9 @@ export const SubmitModal: React.FC<SubmitModalProps> = ({
   const { answers } = useSection();
 
   const handleSubmit = async () => {
-    console.log("Submitting answers:", answers);
-    const recommendations = await assessAnswers(answers);
-    console.log("Recommendations:", recommendations);
+    console.log("Submitting answers:", { answers });
+    const response = await assessAnswers(answers);
+    console.log("Recommendations:", response.results);
     navigate("/");
   };
 
