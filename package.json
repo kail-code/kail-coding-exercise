@@ -5,7 +5,7 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "yarn workspaces run build",
+    "build": "cd packages/frontend && yarn build",
     "test": "yarn workspaces run test",
     "dev": "yarn workspaces run dev",
     "lint": "yarn workspaces run lint"
