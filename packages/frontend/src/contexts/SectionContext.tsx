@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
-interface Answer {
+export interface Answer {
   question_id: string;
   value: number;
 }

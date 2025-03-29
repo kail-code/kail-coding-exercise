@@ -13,7 +13,8 @@ export interface AssessmentRequest {
 }
 
 export interface AssessmentResponse {
-  results: string[];
+  results?: string[];
+  error?: string;
 }
 
 export type Domain = DomainMapping["domain"];

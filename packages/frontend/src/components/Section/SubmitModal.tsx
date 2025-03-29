@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router";
 import { Modal } from "../common/Modal";
 import { useSection } from "@/contexts/SectionContext";
+import { assessAnswers } from "@/api/assess.api";
 
 interface SubmitModalProps {
   isOpen: boolean;
@@ -15,8 +16,10 @@ export const SubmitModal: React.FC<SubmitModalProps> = ({
   const navigate = useNavigate();
   const { answers } = useSection();
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     console.log("Submitting answers:", answers);
+    const recommendations = await assessAnswers(answers);
+    console.log("Recommendations:", recommendations);
     navigate("/");
   };
 

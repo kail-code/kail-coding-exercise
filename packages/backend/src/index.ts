@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 import { assessAnswers } from "./services/assessment";
 import { AssessmentRequest, AssessmentResponse } from "./types";
+import { getScreener } from "./services/screener";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -35,6 +36,31 @@ app.post(
     }
   }
 );
+
+app.get("/api/screener", async (req: Request, res: Response) => {
+  const screener = await getScreener();
+  res.json(screener);
+});
+
+// Create a centralized error handler
+interface ApiError extends Error {
+  statusCode?: number;
+}
+
+const errorHandler = (
+  err: ApiError,
+  req: Request,
+  res: Response,
+  next: Function
+) => {
+  const statusCode = err.statusCode || 500;
+  res.status(statusCode).json({
+    error: err.message || "Internal Server Error",
+    stack: process.env.NODE_ENV === "development" ? err.stack : undefined,
+  });
+};
+
+app.use(errorHandler);
 
 // Start server
 app.listen(PORT, () => {
