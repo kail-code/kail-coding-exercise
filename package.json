@@ -1,0 +1,13 @@
+{
+  "name": "diagnostic-screener",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "yarn workspaces run build",
+    "test": "yarn workspaces run test",
+    "dev": "yarn workspaces run dev",
+    "lint": "yarn workspaces run lint"
+  }
+}
