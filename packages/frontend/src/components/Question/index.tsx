@@ -1,33 +1,47 @@
 import React from "react";
 import { useParams, useRouteLoaderData } from "react-router";
+import { useSection } from "@/contexts/SectionContext";
+import { getQuestionById } from "@/selectors/screener.selectors";
 
 export const Question: React.FC = () => {
   // Hooks
   const questionsData = useRouteLoaderData("questions");
-  const params = useParams();
+  const { questionId, sectionIndex } = useParams();
+  const { getAnswer, addAnswer, updateAnswer } = useSection();
 
   // Selectors
   const section = questionsData?.content.sections[0];
   const answers = section?.answers;
-  const question = section?.questions.find(
-    (question: any) => question.question_id === params.questionId
-  );
+  const question = getQuestionById(questionsData, { sectionIndex, questionId });
+  const answer = getAnswer(question?.question_id);
 
-  console.log("question", question);
+  const handleAnswer = (value: number) => {
+    if (question) {
+      const existingAnswer = getAnswer(question.question_id);
+      if (existingAnswer !== undefined) {
+        updateAnswer(question.question_id, value);
+      } else {
+        addAnswer(question.question_id, value);
+      }
+    }
+  };
+
   return (
     <div className="bg-white rounded-xl shadow-soft p-6 mt-8">
       <div className="mb-6">
-        <h2 className="text-xl font-semibold mb-2 text-secondary-800">
-          {/* Question {questionNumber} of {totalQuestions} */}
-        </h2>
-        <p className="text-secondary-700 text-lg">{question.title}</p>
+        <p className="text-secondary-700 text-lg">{question?.title}</p>
       </div>
 
       <div className="space-y-3">
         {answers.map((option: any) => (
           <button
-            key={option.value}
-            className="w-full text-left p-4 rounded-lg border border-secondary-200 hover:bg-secondary-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors duration-200"
+            key={`${question?.question_id}-${option.value}`}
+            onClick={() => handleAnswer(option.value)}
+            className={`w-full text-left p-4 rounded-lg border ${
+              answer === option.value
+                ? "border-primary-500 bg-primary-50"
+                : "border-secondary-200 hover:bg-secondary-50"
+            } focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors duration-200`}
           >
             {option.title}
           </button>

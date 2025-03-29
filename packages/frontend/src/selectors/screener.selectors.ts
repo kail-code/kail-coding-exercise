@@ -16,7 +16,7 @@ export const getQuestionByIndex = (
 
 export const getQuestionById = (
   data: Screener,
-  props: { sectionIndex: string | undefined; questionId: string }
+  props: { sectionIndex: string | undefined; questionId: string | undefined }
 ) => {
   return getSection(data, props).questions.find(
     (question) => question.question_id === props.questionId
@@ -29,5 +29,12 @@ export const getCurrentQuestionIndex = (
 ) => {
   return getSection(data, props).questions.findIndex(
     (question) => question.question_id === props.questionId
+  );
+};
+
+export const getTotalQuestions = (data: Screener) => {
+  return data.content.sections.reduce(
+    (acc, section) => acc + section.questions.length,
+    0
   );
 };

@@ -10,8 +10,10 @@ import {
   getCurrentQuestionIndex,
   getQuestionByIndex,
   getSection,
+  getTotalQuestions,
 } from "@/selectors/screener.selectors";
 import { Screener } from "@/types";
+import { SectionProvider } from "@/contexts/SectionContext";
 
 export const Section: React.FC = () => {
   // Hooks
@@ -25,7 +27,8 @@ export const Section: React.FC = () => {
     sectionIndex,
     questionId,
   });
-  const totalQuestions = section.questions.length;
+  const totalSectionQuestions = section.questions.length;
+  const totalQuestions = getTotalQuestions(data);
 
   // Methods
   const handlePrevious = () => {
@@ -41,7 +44,7 @@ export const Section: React.FC = () => {
   };
 
   const handleNext = () => {
-    if (currentQuestionIndex < totalQuestions - 1) {
+    if (currentQuestionIndex < totalSectionQuestions - 1) {
       const nextQuestion = getQuestionByIndex(data, {
         sectionIndex,
         questionIndex: currentQuestionIndex + 1,
@@ -53,35 +56,33 @@ export const Section: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-secondary-50 py-8 px-4">
-      <div className="max-w-2xl mx-auto">
-        <h1 className="text-2xl font-bold mb-6 text-primary-900">
-          {section.title}
-        </h1>
-        <ProgressBar
-          current={currentQuestionIndex + 1}
-          total={totalQuestions}
-        />
+    <SectionProvider onAnswerChange={handleNext}>
+      <div className="min-h-screen bg-secondary-50 py-8 px-4">
+        <div className="max-w-2xl mx-auto">
+          <h1 className="text-2xl font-bold mb-6 text-primary-900">
+            {data?.content?.display_name}
+          </h1>
+          <h1 className="text-2xl font-bold mb-6 text-primary-900">
+            {section.title}
+          </h1>
+          <ProgressBar
+            current={currentQuestionIndex + 1}
+            total={totalQuestions}
+          />
 
-        <Outlet />
+          <Outlet />
 
-        <div className="flex justify-between mt-8">
-          <button
-            onClick={handlePrevious}
-            disabled={currentQuestionIndex === 0}
-            className="px-4 py-2 text-primary-600 disabled:text-secondary-400"
-          >
-            Previous
-          </button>
-          <button
-            onClick={handleNext}
-            disabled={currentQuestionIndex === totalQuestions - 1}
-            className="px-4 py-2 text-primary-600 disabled:text-secondary-400"
-          >
-            Next
-          </button>
+          <div className="flex justify-between mt-8">
+            <button
+              onClick={handlePrevious}
+              disabled={currentQuestionIndex === 0}
+              className="px-4 py-2 text-primary-600 disabled:text-secondary-400"
+            >
+              Previous
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </SectionProvider>
   );
 };
