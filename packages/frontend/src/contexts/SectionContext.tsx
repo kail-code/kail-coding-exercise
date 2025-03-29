@@ -45,7 +45,7 @@ export const SectionProvider: React.FC<SectionProviderProps> = ({
     });
   };
 
-  const getAnswer = (questionId: string) => {
+  const getAnswer = (questionId: string | undefined) => {
     return answers.find((answer) => answer.question_id === questionId)?.value;
   };
 

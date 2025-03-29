@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Outlet,
   useRouteLoaderData,
@@ -14,12 +14,14 @@ import {
 } from "@/selectors/screener.selectors";
 import { Screener } from "@/types";
 import { SectionProvider } from "@/contexts/SectionContext";
+import { SubmitModal } from "./SubmitModal";
 
 export const Section: React.FC = () => {
   // Hooks
   const data = useRouteLoaderData("questions") as Screener;
   const navigate = useNavigate();
   const { sectionIndex, questionId } = useParams();
+  const [showSubmitModal, setShowSubmitModal] = useState(false);
 
   // Selectors
   const section = getSection(data, { sectionIndex });
@@ -52,12 +54,14 @@ export const Section: React.FC = () => {
       navigate(
         `/section/${sectionIndex}/questions/${nextQuestion.question_id}`
       );
+    } else {
+      setShowSubmitModal(true);
     }
   };
 
   return (
     <SectionProvider onAnswerChange={handleNext}>
-      <div className="min-h-screen bg-secondary-50 py-8 px-4">
+      <div className="py-8 px-4">
         <div className="max-w-2xl mx-auto">
           <h1 className="text-2xl font-bold mb-6 text-primary-900">
             {data?.content?.display_name}
@@ -83,6 +87,11 @@ export const Section: React.FC = () => {
           </div>
         </div>
       </div>
+
+      <SubmitModal
+        isOpen={showSubmitModal}
+        onClose={() => setShowSubmitModal(false)}
+      />
     </SectionProvider>
   );
 };
