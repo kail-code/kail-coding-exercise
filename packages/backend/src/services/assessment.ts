@@ -46,7 +46,7 @@ export function assessAnswers(answers: Answer[]): string[] {
   // Determine recommended assessments based on thresholds
   const recommendations = Object.entries(domainScores)
     .filter(([domain, score]) => score >= THRESHOLDS[domain as Domain])
-    .map(([domain]) => RECOMMENDATIONS[domain as Domain]);
+    .map(([domain]) => RECOMMENDATIONS[domain as Domain] as string);
 
   return recommendations;
 }

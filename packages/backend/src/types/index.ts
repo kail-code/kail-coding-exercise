@@ -19,10 +19,6 @@ export interface AssessmentResponse {
 
 export type Domain = DomainMapping["domain"];
 
-export interface Thresholds {
-  [key in Domain]: number;
-}
+export type Thresholds = Record<Domain, number>;
 
-export interface Recommendations {
-  [key in Domain]: string;
-}
+export type Recommendations = Record<Domain, string>;
