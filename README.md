@@ -87,7 +87,6 @@ A key enhancement would be integrating with Blueprint's patient catalog system, 
 
 ## Known Issues
 
-- The back button in the browser sometimes causes unexpected behavior in the assessment flow
 - Assessment progress is not saved if the user leaves the page or refreshes
 - Multiple Sections - while the app is structured in a way to handle multiple sections, the user won't be able to navigate to the additional sections and won't be able to submit answers when there are multiple sections
 - API endpoints lack rate limiting and could be vulnerable to abuse
