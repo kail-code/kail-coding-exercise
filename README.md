@@ -58,55 +58,13 @@ This project is organized as a monorepo using Yarn workspaces, containing both f
 - Services layer for business logic
 - File-based storage for assessment data
 
-## Production Deployment Plan
+## Production Strategy
 
-### High Availability & Performance
+For a true production deployment, the application would be hosted entirely on AWS infrastructure. The backend would run on AWS Elastic Beanstalk, with environment variables securely managing configuration for different deployment environments (development, staging, production). These variables would control settings like API endpoints, logging levels, and other environment-specific configurations. Feature flags would be implemented to enable gradual rollout of new features and quick rollback if issues are detected.
 
-1. **Backend (Heroku)**
+Security would be implemented through multiple layers of protection. The application servers would be placed in private subnets, accessible only through a bastion host in a public subnet. This setup ensures that direct access to the servers is restricted and all administrative access must go through this controlled entry point. Data transmission would be secured through HTTPS using AWS Certificate Manager. The API endpoints would implement rate limiting to prevent abuse, and include proper CORS configuration and security headers to prevent common web vulnerabilities. Input validation and sanitization would be implemented at both frontend and backend layers, with special attention to protecting sensitive health data in compliance with HIPAA requirements.
 
-   - Multiple dynos for redundancy
-   - Auto-scaling based on traffic
-   - CDN integration for static assets
-   - Caching layer for frequently accessed data
-
-**Frontend (ICDSoft VPS)**
-
-- Nginx web server for efficient static file serving
-- SSL/TLS encryption via Let's Encrypt
-- Browser caching and compression
-- Regular backups and monitoring
-- Custom domain configuration
-
-### Security Measures
-
-1. **API Security**
-
-   - Rate limiting
-   - Input validation
-   - CORS configuration
-   - HTTPS enforcement
-   - Security headers
-
-2. **Data Protection**
-   - Input sanitization
-   - XSS prevention
-   - CSRF protection
-   - Secure session management
-
-### Monitoring & Troubleshooting
-
-1. **Logging**
-
-   - Structured logging
-   - Error tracking
-   - Performance monitoring
-   - User analytics
-
-2. **Alerting**
-   - Error rate alerts
-   - Performance degradation alerts
-   - Availability monitoring
-   - Custom business metrics
+For effective troubleshooting in production, the application would utilize AWS CloudWatch for comprehensive logging and monitoring. Error tracking would capture both frontend and backend issues through CloudWatch Logs, with detailed context to facilitate quick resolution. CloudWatch Metrics would track key performance indicators like response times and error rates, with automated alerts for anomalies. This monitoring setup would help identify potential issues before they impact users and ensure the application maintains its core objective of providing accurate assessments.
 
 ## Trade-offs
 
