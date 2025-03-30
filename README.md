@@ -64,11 +64,18 @@ For a true production deployment, the application would be hosted entirely on AW
 
 Security would be implemented through multiple layers of protection. The application servers would be placed in private subnets, accessible only through a bastion host in a public subnet. This setup ensures that direct access to the servers is restricted and all administrative access must go through this controlled entry point. Data transmission would be secured through HTTPS using AWS Certificate Manager. The API endpoints would implement rate limiting to prevent abuse, and include proper CORS configuration and security headers to prevent common web vulnerabilities. Input validation and sanitization would be implemented at both frontend and backend layers, with special attention to protecting sensitive health data in compliance with HIPAA requirements.
 
-For effective troubleshooting in production, the application would utilize AWS CloudWatch for comprehensive logging and monitoring. Error tracking would capture both frontend and backend issues through CloudWatch Logs, with detailed context to facilitate quick resolution. CloudWatch Metrics would track key performance indicators like response times and error rates, with automated alerts for anomalies. This monitoring setup would help identify potential issues before they impact users and ensure the application maintains its core objective of providing accurate assessments.
+For effective troubleshooting in production, the application would utilize New Relic for comprehensive logging and monitoring. Error tracking would capture both frontend and backend issues through New Relic APM, providing detailed transaction traces and error context. New Relic Metrics would track key performance indicators like response times and error rates, with automated alerts.
 
 ## Trade-offs
 
-Testing is a critical area that requires attention before production deployment. While some key frontend components have test coverage, the current test suite falls short of production requirements. A comprehensive testing strategy would need to be implemented, covering both frontend and backend components. I would also consider adding E2E UI testing with Cypress.
+Testing is a critical area that requires attention before production deployment. While some key frontend components have test coverage, the current test suite falls short of production requirements. Each file with any logic will need to be under unit test. Any critical business logic would need to have integration testing OR complete frontend/backend E2E testing with Cypress. This is particularly important for:
+
+- Assessment scoring logic that determines recommendations
+- Question navigation and state management
+- Answer submission and validation
+- API integration points
+
+The current implementation focuses on testing core frontend components, but a production-ready version would require comprehensive test coverage to ensure reliability and prevent regressions when implementing new features or making changes to existing functionality.
 
 There is no implementation of authentication for the app. The API endpoints are completely open, with no token-based authentication or authorization headers required. While this simplified initial development, proper authentication and API security would be essential for a production environment, particularly for handling sensitive health data.
 
