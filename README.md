@@ -96,5 +96,5 @@ Integrate this form with Blueprint's patient catalog system, allowing healthcare
 ## About Me
 
 - GitHub: [kfkkail](https://github.com/kfkkail)
-- LinkedIn: [Kail Keusch](https://linkedin.com/in/kailkeusch)
+- LinkedIn: [Kail Keusch](https://www.linkedin.com/in/keuschkf/)
 - Resume: [Kail Keusch](https://app.kailkeusch.com/KailKeuschResume.pdf)
