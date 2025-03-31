@@ -87,7 +87,7 @@ Integrate this form with Blueprint's patient catalog system, allowing healthcare
 
 ## Known Issues
 
-- Assessment progress is not saved if the user leaves the page or refreshes
+- Assessment answers are not saved if the user leaves the page or refreshes
 - Multiple Sections - while the app is structured in a way to handle multiple sections, the user won't be able to navigate to the additional sections and won't be able to submit answers when there are multiple sections
 - API endpoints lack rate limiting and could be vulnerable to abuse
 - The app does not currently require that all questions be answered
