@@ -83,7 +83,7 @@ The mobile responsiveness is not well implemented currently. The current layout 
 
 ## Future Improvements
 
-A key enhancement would be integrating with Blueprint's patient catalog system, allowing healthcare providers to send assessment links directly to patients through a secure mechanism. Each assessment link would be generated with a unique UUID, ensuring secure and accurate mapping of responses to the correct patient record. When patients complete their assessment, their answers and the resulting recommendations would be securely posted back to Blueprint's system and stored in their patient portfolio. The current modular architecture provides a foundation for this feature while also focusing on HIPAA compliance and secure data persistence.
+Integrate this form with Blueprint's patient catalog system, allowing healthcare providers to send assessment links directly to patients through a secure mechanism. Each assessment link would be generated with a unique UUID, ensuring secure and accurate mapping of responses to the correct patient record. The UUID would be valid until the patient submits the questions or after a timeout period. When patients complete their assessment, their answers and the resulting recommendations would be securely posted back to Blueprint's system and stored in their patient portfolio. The current modular architecture provides a foundation for this feature while also focusing on HIPAA compliance and secure data persistence.
 
 ## Known Issues
 
